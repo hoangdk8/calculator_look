@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,10 +8,61 @@
     android:id="@+id/fragment_container_web"
     >
 
-    <WebView
-        android:id="@+id/webView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        android:background="#17181A"
+        >
+        <ImageView
+            android:id="@+id/image_button_out"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="25dp"
+            android:src="@drawable/ic_out_search"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            android:layout_width="320dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toEndOf="@id/image_button_out"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextSearch"
+                android:layout_width="320dp"
+                android:layout_height="48dp"
+                android:paddingLeft="16dp"
+                android:hint="Search or enter a URL"
+                android:inputType="text"
+                android:textColorHint="#FFFFFF"
+                android:textColor="#FFFFFF"
+                android:imeOptions="actionGo|actionSearch"
+                android:background="@drawable/bg_search"
+                android:singleLine="true"
+                android:importantForAccessibility="yes"
+                android:contentDescription="Search or enter a URL" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:layout_marginTop="80dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </FrameLayout>

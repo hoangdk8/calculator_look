@@ -2,8 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/fragment_container_security_question"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backgroud_main"
     tools:context=".app.ui.fragment.SecurityQuestionFragment">
@@ -33,7 +33,7 @@
             android:layout_height="37dp"
             android:layout_marginTop="60dp"
             android:layout_marginRight="16dp"
-            android:background="@drawable/background_button_skip"
+            android:background="@drawable/background_button_save"
             android:fontFamily="@font/poppins_regular"
             android:text="Skip"
             android:textAllCaps="false"
@@ -68,12 +68,26 @@
             android:gravity="start|center"
             android:hint="You answer"
             android:paddingLeft="12dp"
-            android:textColorHint="#BFC6CC"
             android:textColor="#FFFFFF"
+            android:textColorHint="#BFC6CC"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/menu_popup" />
+
+        <TextView
+            android:id="@+id/text_view_warning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:text="You need to answer the question to continue!"
+            android:textColor="#E94540"
+            android:textSize="14sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_text_answer" />
+
         <Button
             android:id="@+id/button_next"
             android:layout_width="320dp"
@@ -84,12 +98,11 @@
             android:text="Next"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
-            android:textStyle="bold"
             android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            />
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

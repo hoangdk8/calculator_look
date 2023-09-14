@@ -4,8 +4,7 @@ import android.content.Context
 import android.content.Intent
 import com.apero.inappupdate.AppUpdateManager
 import com.mobiai.R
-import com.mobiai.app.ui.fragment.HomeFragment
-import com.mobiai.app.ui.fragment.NotesFragment
+import com.mobiai.app.ui.fragment.CalculatorFragment
 import com.mobiai.base.basecode.ui.activity.BaseActivity
 import com.mobiai.databinding.ActivityMainBinding
 
@@ -33,7 +32,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
 
     private fun attachFragment(){
-        addFragment(HomeFragment.instance())
+        addFragment(CalculatorFragment.instance())
     }
     override fun onResume() {
         super.onResume()

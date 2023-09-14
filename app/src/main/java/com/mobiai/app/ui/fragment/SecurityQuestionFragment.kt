@@ -27,7 +27,7 @@ class SecurityQuestionFragment : BaseFragment<FragmentSecurityQuestionBinding>()
         val popupMenu = PopupMenu(requireContext(),binding.menuPopup)
         popupMenu.menuInflater.inflate(R.menu.menu_popup,popupMenu.menu)
         popupMenu.setOnMenuItemClickListener { menuItem ->
-        when (menuItem.itemId) {
+            when (menuItem.itemId) {
                 R.id.question_1 -> {
                     binding.menuPopup.text = "What is your favorite food?"
                 }
@@ -56,19 +56,24 @@ class SecurityQuestionFragment : BaseFragment<FragmentSecurityQuestionBinding>()
 
     override fun getBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentSecurityQuestionBinding {
         binding = FragmentSecurityQuestionBinding.inflate(inflater, container, false)
+
         setupViews()
         return binding
     }
 
     private fun setupViews() {
         binding.buttonNext.setOnClickListener {
-            addQuestion()
-            val newFragment = SuccessfullyQuestionFragment()
-            val fragmentManager = requireActivity().supportFragmentManager
-            val transaction = fragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_container_security_question, newFragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
+            if (binding.editTextAnswer.text.isEmpty()){
+                binding.textViewWarning.visibility = View.VISIBLE
+            }else {
+                addQuestion()
+                val newFragment = SuccessfullyQuestionFragment()
+                val fragmentManager = requireActivity().supportFragmentManager
+                val transaction = fragmentManager.beginTransaction()
+                transaction.replace(R.id.fragment_container_security_question, newFragment)
+                transaction.addToBackStack(null)
+                transaction.commit()
+            }
         }
         binding.buttonSkip.setOnClickListener {
             val newFragment = NotesFragment()

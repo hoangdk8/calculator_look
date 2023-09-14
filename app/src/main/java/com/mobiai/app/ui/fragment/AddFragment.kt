@@ -31,13 +31,14 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
         return binding
     }
 
+
     private fun setupViews() {
 
         binding.arrowLeft.setOnClickListener {
             backNoteFragment()
 
         }
-        binding.done.setOnClickListener {
+        binding.buttonSave.setOnClickListener {
             if (binding.editTextTitle.text.isEmpty() || binding.editTextContent.text.isEmpty()) {
                 val newFragment = WarningFragment()
                 val fragmentManager = requireActivity().supportFragmentManager
@@ -53,11 +54,13 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
                     Log.d("hoang", "setupViews:$it ")
                     if (it.contains(id)) {
                         updateNote()
+                        hideKeyboard()
                         Toast.makeText(requireContext(), "Cập nhật thành công", Toast.LENGTH_SHORT)
                             .show()
                         backNoteFragment()
                     } else {
                         addNote()
+                        hideKeyboard()
                         Toast.makeText(requireContext(), "Lưu thành công", Toast.LENGTH_SHORT)
                             .show()
                         backNoteFragment()
@@ -66,7 +69,10 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
             }
         }
     }
-
+    override fun hideKeyboard() {
+        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(binding.editTextTitle.windowToken, 0)
+    }
     private fun updateNote() {
         val bundle = arguments
         val currentTimeMillis = System.currentTimeMillis()
@@ -78,6 +84,7 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
     }
 
     override fun initView() {
+
         val bundle = arguments
         if (bundle != null) {
 
