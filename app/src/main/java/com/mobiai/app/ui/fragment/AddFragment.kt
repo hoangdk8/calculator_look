@@ -1,6 +1,9 @@
 package com.mobiai.app.ui.fragment
 
 import android.content.Context
+import android.graphics.Color
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -33,7 +36,24 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
 
 
     private fun setupViews() {
+        val textWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                val text = s.toString()
+                if (text.isEmpty()) {
+                    binding.buttonSave.setTextColor(Color.parseColor("#78828A"))
+                } else {
+                    binding.buttonSave.setTextColor(Color.parseColor("#6281F2")) // Màu tím
+                }
+            }
+        }
+        binding.editTextTitle.addTextChangedListener(textWatcher)
         binding.arrowLeft.setOnClickListener {
             backNoteFragment()
 

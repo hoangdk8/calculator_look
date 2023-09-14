@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.webkit.CookieManager
+import android.webkit.URLUtil
 import android.webkit.WebChromeClient
 import android.webkit.WebSettings
 import android.webkit.WebView
@@ -34,17 +35,8 @@ class WebFragment : BaseFragment<FragmentWebBinding>() {
         webSettings.savePassword = false
         @Suppress("DEPRECATION")
         webSettings.saveFormData = false
-
-    }
-
-    @SuppressLint("SetJavaScriptEnabled")
-    override fun getBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentWebBinding {
-        binding = FragmentWebBinding.inflate(inflater, container, false)
-        binding.webView.settings.javaScriptEnabled = true
-
         binding.imageButtonOut.setOnClickListener {
             if (binding.webView.canGoBack()) {
-                // Nếu WebView có thể quay lại trang trước đó, thì quay lại
                 binding.webView.goBack()
             }else {
                 val newFragment = CalculatorFragment()
@@ -55,9 +47,30 @@ class WebFragment : BaseFragment<FragmentWebBinding>() {
                 transaction.commit()
             }
         }
+    }
+
+    @SuppressLint("SetJavaScriptEnabled")
+    override fun getBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentWebBinding {
+        binding = FragmentWebBinding.inflate(inflater, container, false)
+        binding.webView.settings.javaScriptEnabled = true
+
+        binding.webView.settings.setSupportZoom(true)
+        binding.webView.settings.builtInZoomControls = true
+        binding.webView.settings.displayZoomControls = false
+
+        binding.webView.webViewClient = object : WebViewClient() {
+            @Deprecated("Deprecated in Java")
+            override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+                if (url != null) {
+                    view?.loadUrl(url)
+                }
+                return true
+            }
+        }
         binding.editTextSearch.setOnKeyListener { _, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
                 val searchKeyword = binding.editTextSearch.text.toString()
+
                 if (searchKeyword.isNotEmpty()) {
                     performGoogleSearch(searchKeyword)
                     hideKeyboard()
@@ -68,6 +81,7 @@ class WebFragment : BaseFragment<FragmentWebBinding>() {
         }
 
         return binding
+
     }
 
     override fun hideKeyboard() {
@@ -76,7 +90,6 @@ class WebFragment : BaseFragment<FragmentWebBinding>() {
     }
     @SuppressLint("SetJavaScriptEnabled")
     private fun performGoogleSearch(keyword: String) {
-        val googleSearchUrl = "https://www.google.com/search?q=$keyword"
         binding.webView.webChromeClient = object : WebChromeClient() {
             override fun onProgressChanged(view: WebView?, newProgress: Int) {
                 if (newProgress == 100) {
@@ -90,6 +103,10 @@ class WebFragment : BaseFragment<FragmentWebBinding>() {
                 binding.webView.visibility = View.VISIBLE
             }
         }
-        binding.webView.loadUrl(googleSearchUrl)
+        if (URLUtil.isNetworkUrl(keyword)) {
+            binding.webView.loadUrl(keyword)
+        } else {
+            binding.webView.loadUrl("https://www.google.com/search?q=$keyword")
+        }
     }
 }

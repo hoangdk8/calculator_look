@@ -2,10 +2,11 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
     android:id="@+id/fragment_container_warning"
-    android:background="@drawable/backgroud_main"
+    android:background="#17181A"
     tools:context=".app.ui.fragment.WarningFragment">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,8 +18,10 @@
             android:background="@drawable/bg_successfully"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
 
             <ImageView
                 android:id="@+id/imageView3"
@@ -33,13 +36,13 @@
             <TextView
                 android:layout_width="276dp"
                 android:layout_height="60dp"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="center"
-                android:text="You need to fill in the “Title” and “Note”"
+                android:text="You need to fill in the “Note”"
                 android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:layout_marginTop="20dp"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/imageView3" />
@@ -48,9 +51,9 @@
                 android:id="@+id/button_confirm"
                 android:layout_width="276dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="24dp"
                 android:background="@drawable/background_button_next"
                 android:text="Done"
-                android:layout_margin="24dp"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"

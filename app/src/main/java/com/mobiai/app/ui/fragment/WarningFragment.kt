@@ -19,12 +19,8 @@ class WarningFragment : BaseFragment<FragmentWarningBinding>() {
     }
     override fun initView() {
         binding.buttonConfirm.setOnClickListener {
-            val newFragment = AddFragment()
             val fragmentManager = requireActivity().supportFragmentManager
-            val transaction = fragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_container_warning, newFragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
+            fragmentManager.popBackStack()
         }
     }
 
